@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Epic Binary Website</title>
+        <link rel="stylesheet" href="static/style.css">
+        <script src="static/test.js"></script>
+        <script src="static/fixedtodenary.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            <a href="/" id="home_button">Home</a>
+            <h1>Conversion between Fixed Point and Denary</h1>
+        </div>
+        <form>
+            <p>Choose what you are converting from</p>
+            <button type='button' id="bin_from_button" onclick="select_from('bin_from_button');">Binary</button>
+            <button type='button' id="den_from_button" onclick="select_from('den_from_button');">Denary</button>
+            
+            <p>Enter your number:</p>
+            <input type="text" id="conv_from" style="margin-bottom: 5%;">
+            
+            <button type="button" id="convert" onclick="convert_num();">Convert</button>
+            
+            <p>Your result:</p>
+            <input type="text" id="result_box" style="background-color: rgb(180, 179, 179);" readonly>
+        </form>
+    </body>

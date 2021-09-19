@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>Epic Binary Website</title>
+        <link rel="stylesheet" href="static/style.css">
+        <script src="static/test.js" defer></script>
+    </head>
+    <body>
+        <div id="header">
+            <a href="/" id="home_button">Home</a>
+            <h1>Binary Test</h1>
+        </div>
+        <form onsubmit="return false">
+            <p id="q_type"></p>
+            <p id="question"></p>
+            <input type="text" id="answer">
+            <button type="button" id="checkButton" onclick="check()">Check</button>
+            <p id="result"></p>
+            <button type="button" id="continueButton" onclick="_continue()" style="display: none;">Continue</button>
+        </form>
+    </body>

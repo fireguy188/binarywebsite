@@ -1,0 +1,147 @@
+@font-face {
+    font-family: montserrat;
+    src: url('Montserrat/Montserrat-Medium.ttf');
+}
+
+body {
+    font-family: montserrat;
+    font-size: 1vw;
+    margin: 0;
+    background-image: url('binary.jpg');
+    background-size: 100%;
+}
+
+h1 {
+    color: black;
+    text-align: center;
+    font-size: 2vw;
+    background-color: white;
+    padding: 2%;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    border-bottom-width: 5px;
+}
+
+.page_links, button {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1vw;
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: grey;
+    padding: 2%;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+    margin-bottom: 10%;
+    width: 20%;
+    transition: all .2s ease-in-out;
+}
+
+.page_links:hover {
+    background-color: #dbd1d1;
+    border-color: black;
+    transform: scale(1.1);
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #dbd1d1;
+    border-color: black;
+    transform: scale(1.1);
+}
+
+#convert {
+    background-color: rgb(41, 26, 243);
+    color: white;
+    border-color: rgb(107, 91, 248);
+}
+
+#convert:hover {
+    background-color: rgb(107, 91, 248);
+}
+
+#buttons {
+    margin: auto;
+    margin-top: 5%;
+    text-align: center;
+}
+
+form {
+    margin: auto;
+    margin-top: 5%;
+    text-align: center;
+    background-color: white;
+    width: 40%;
+    padding: 5%;
+    border-radius: 10px;
+}
+
+input[type="text"] {
+    display: block;
+    margin: auto;
+    width: 50%;
+    height: 2.5vw;
+    font-size: 2vw;
+    font-family: "tahoma";
+}
+
+#home_button {
+    position: absolute;
+    text-decoration: none;
+    color: black;
+    border-style: solid;
+    border-color: black; 
+    border-radius: 50px;
+    font-size: 1.5vw;
+    margin: 1.5%;
+    padding: 1%;
+    transition: all .2s ease-in-out;
+}
+
+#home_button:hover {
+    transform: scale(1.1);
+    background-color: grey;
+}
+
+#mantissa_div, #exponent_div {
+    display: inline;
+}
+
+#bin_from_button_select {
+    text-align: center;
+}
+
+#test {
+    background-color: gold;
+    border-color: rgb(201, 171, 5);
+}
+
+#question {
+    font-size: 2vw;
+}
+
+#checkButton {
+    background-color: rgb(4, 233, 4);
+    border-color: rgb(17, 173, 2);
+    margin-top: 5%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#continueButton {
+    margin-top: 5%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#answer {
+    text-align: center;
+}
+
+#result {
+    font-size: 2vw;
+}
