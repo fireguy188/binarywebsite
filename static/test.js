@@ -642,6 +642,43 @@ function check() {
         user_answer = whole + fractional;
     }
 
+    if (q_num == 9 || q_num == 10) {
+        var split_answer = user_answer.split(" ");
+        var mantissa = split_answer[0];
+
+        if (split_answer.length == 1) {
+            var exponent = "0";
+        } else {
+            var exponent = split_answer[1];
+        }
+
+        if (!user_answer.includes('.')) {
+            user_answer += '.'
+        }
+
+        // clean mantissa
+        mantissa = mantissa.split('.');
+        var whole = mantissa[0];
+        var fractional = '.'+mantissa[1];
+        // trim off ones/zeros from beginning to simplify
+        while (whole.length >= 2 && whole[0] == whole[1]) {
+            whole = whole.slice(1, whole.length);
+        }
+        // trim off zeros from end to simplify
+        while (fractional.length >= 1 && ".0".includes(fractional[fractional.length-1])) {
+            fractional = fractional.slice(0, fractional.length-1);
+        }
+        mantissa = whole + fractional;
+
+        // clean exponent
+        // trim off ones/zeros from beginning to simplify
+        while (exponent.length >= 2 && exponent[0] == exponent[1]) {
+            exponent = exponent.slice(1, exponent.length);
+        }
+
+        user_answer = mantissa + ' ' + exponent;
+    }
+
     if (user_answer.length == 0) {
         user_answer = "0";
     }
@@ -659,7 +696,7 @@ function check() {
 
 function gen_q() {
     if (q_num == 1 || q_num == 2) {
-        document.getElementById("q_type").innerHTML = "Conversion between binary, denary and hexadecimal";
+        document.getElementById("q_type").innerHTML = "<b>" + q_num + ".</b> Conversion between binary, denary and hexadecimal";
         var converting = ['binary', 'denary', 'hexadecimal'];
 
         var choice = Math.floor(Math.random()*3);
@@ -695,7 +732,7 @@ function gen_q() {
 
         var question = "Convert <b>" + num + "</b> (" + first_conversion + ") to " + second_conversion;
     } else if (q_num == 3 || q_num == 4) {
-        document.getElementById("q_type").innerHTML = "Conversion between 'sign and magnitude' and denary";
+        document.getElementById("q_type").innerHTML = "<b>" + q_num + ".</b> Conversion between 'sign and magnitude' and denary";
         var converting = ["sign and magnitude", "denary"];
 
         var choice = Math.floor(Math.random()*2);
@@ -723,7 +760,7 @@ function gen_q() {
 
         var question = "Convert <b>" + num + "</b> (" + first_conversion + ") to " + second_conversion;
     } else if (q_num == 5 || q_num == 6) {
-        document.getElementById("q_type").innerHTML = "Conversion between 'twos compliment' and denary";
+        document.getElementById("q_type").innerHTML = "<b>" + q_num + ".</b> Conversion between 'twos compliment' and denary";
         var converting = ["twos compliment", "denary"];
 
         var choice = Math.floor(Math.random()*2);
@@ -748,7 +785,7 @@ function gen_q() {
 
         var question = "Convert <b>" + num + "</b> (" + first_conversion + ") to " + second_conversion;
     } else if (q_num == 7 || q_num == 8) {
-        document.getElementById("q_type").innerHTML = "Conversion between 'fixed point' and denary";
+        document.getElementById("q_type").innerHTML = "<b>" + q_num + ".</b> Conversion between 'fixed point' and denary";
         var converting = ["fixed point", "denary"];
 
         var choice = Math.floor(Math.random()*2);
@@ -756,12 +793,12 @@ function gen_q() {
         converting.splice(choice, 1);
         var second_conversion = converting[0];
 
-        var whole = gen_bin();
+        var whole = gen_bin().slice(0, 4);
         // trim off ones/zeros from beginning to simplify
         while (whole.length >= 2 && whole[0] == whole[1]) {
             whole = whole.slice(1, whole.length);
         }
-        var fractional = '.'+gen_bin();
+        var fractional = '.'+gen_bin().slice(0, 4);
         // trim off zeros from end to simplify
         while (fractional.length >= 1 && ".0".includes(fractional[fractional.length-1])) {
             fractional = fractional.slice(0, fractional.length-1);
@@ -776,16 +813,65 @@ function gen_q() {
         }
 
         var question = "Convert <b>" + num + "</b> (" + first_conversion + ") to " + second_conversion;
+    } else if (q_num == 9 || q_num == 10) {
+        document.getElementById("q_type").innerHTML = "<b>" + q_num + ".</b> Conversion between 'floating point' and denary";
+        var converting = ["floating point", "denary"];
+
+        var choice = Math.floor(Math.random()*2);
+        var first_conversion = converting[choice];
+        converting.splice(choice, 1);
+        var second_conversion = converting[0];
+
+        var whole = gen_bin().slice(0, 4);
+        // trim off ones/zeros from beginning to simplify
+        while (whole.length >= 2 && whole[0] == whole[1]) {
+            whole = whole.slice(1, whole.length);
+        }
+        var fractional = '.'+gen_bin().slice(0, 4);
+        // trim off zeros from end to simplify
+        while (fractional.length >= 1 && ".0".includes(fractional[fractional.length-1])) {
+            fractional = fractional.slice(0, fractional.length-1);
+        }
+        num = whole + fractional
+
+        if (first_conversion == "floating point") {
+            num = fixed_to_den(num).toString();
+            num = den_to_floating(num);
+            answer = floating_to_den(num[0], num[1]);
+            num = num[0] + " " + num[1]
+        } else {
+            num = fixed_to_den(num).toString();
+            answer = den_to_floating(num);
+            if (answer[1] == undefined) {
+                answer = answer[0];
+            } else {
+                answer = answer[0] + " " + answer[1];
+            }
+        }
+
+        var question = "Convert <b>" + num + "</b> (" + first_conversion + ") to " + second_conversion;
+
+        if (first_conversion == "denary") {
+            question += " (put space between mantissa and exponent)";
+        }
+    } else {
+        document.getElementById("q_type").innerHTML = "Results";
+        document.getElementById('checkButton').style.display = "none";
+        document.getElementById('continueButton').style.display = "none";
+        document.getElementById('answer').style.display = "none";
+        document.getElementById("question").innerHTML = "The results are in";
+        document.getElementById('result').innerHTML = "You got " + correct + "/10 correct";
+        return;
     }
     document.getElementById("question").innerHTML = question;
 }
 
 function _continue() {
-    gen_q();
     document.getElementById('checkButton').style.display = "block";
     document.getElementById('continueButton').style.display = "none";
     document.getElementById('answer').value = "";
     document.getElementById('result').innerHTML = "";
+    gen_q();
 }
 
 // only generate questions if we are on the test page
