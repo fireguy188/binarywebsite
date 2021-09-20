@@ -878,6 +878,6 @@ function _continue() {
 var path = window.location.pathname;
 var page = path.split("/").pop();
 
-if (page == 'test.html') {
+if (page == 'binary_test.html') {
     gen_q();
 }
